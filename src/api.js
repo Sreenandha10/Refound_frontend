@@ -22,5 +22,9 @@ api.interceptors.response.use(
 );
 
 export const errMsg = (e) => e.response?.data?.message || e.message || 'Something went wrong';
-export const img = (path) => `${SERVER}${path}`;
+export const img = (path) => {
+  if (!path) return '';
+  if (path.startsWith('http://') || path.startsWith('https://')) return path;
+  return `${SERVER}${path}`;
+};
 export default api;
